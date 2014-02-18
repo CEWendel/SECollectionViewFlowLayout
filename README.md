@@ -23,16 +23,36 @@ If you choose you can enable auto selection of cells between a first and second 
 
 <p align="center"><img src="http://i.minus.com/ibgqzbf5s9M4cy.gif"/></p>
 
-###Features
-* Works with 
-
 
 ##SEQBImagePickerController
 The example use case (as seen in the gifs) is using SECollectionViewFlowLayout in combination with [QBImagePickerController](https://github.com/questbeat/QBImagePickerController) to select multiple photos from a UIImagePickerController clone. You can use this image picker in your project by adding to your podfile:
 <pre>pod 'SEQBImagePickerController' </pre>
 
 ##SECollectionViewFlowLayout
-You can also use SECollectionViewFlowLayout in your project and apply it to your own UICollectionView.
+You can also use SECollectionViewFlowLayout in your project and use it with your own UICollectionView.
 <pre>pod 'SECollectionViewFlowLayout' </pre>
+
+##Usage
+
+When initializing your `UICollectionViewController` using `initWithCollectionViewLayout`, allocate a new `SECollectionViewFlowLayout`
+
+```objc
+UICollectionViewController *collectionViewController = [[UICollectionViewController alloc] initWithCollectionViewLayout:[SECollectionViewFlowLayout layoutWithAutoSelectRows:YES panToDeselect:YES autoSelectCellsBetweenTouches:YES]];
+```
+
+##Contributing
+Use [Github issues](https://github.com/cewendel/SECollectionViewFlowLayout/issues) to track bugs and feature requests
+
+##Contact
+
+Chris Wendel
+- http://twitter.com/CEWendel
+- [chriwend@umich.edu](mailto:chriwend@umich.edu)
+
+##Licence
+
+MIT
+
+
 
 
