@@ -37,7 +37,11 @@ You can also use SECollectionViewFlowLayout in your project and use it with your
 When initializing your `UICollectionViewController` using `initWithCollectionViewLayout`, allocate a new `SECollectionViewFlowLayout`
 
 ```objc
-UICollectionViewController *collectionViewController = [[UICollectionViewController alloc] initWithCollectionViewLayout:[SECollectionViewFlowLayout layoutWithAutoSelectRows:YES panToDeselect:YES autoSelectCellsBetweenTouches:YES]];
+UICollectionViewController *collectionViewController = 
+[[UICollectionViewController alloc] initWithCollectionViewLayout:
+[SECollectionViewFlowLayout layoutWithAutoSelectRows:YES 
+panToDeselect:YES 
+autoSelectCellsBetweenTouches:YES]];
 ```
 
 ##Contributing
