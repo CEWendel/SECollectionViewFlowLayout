@@ -8,3 +8,4 @@ profile
 xcuserdata/
 project.xcworkspace/
 xcshareddata/
+*.swp
