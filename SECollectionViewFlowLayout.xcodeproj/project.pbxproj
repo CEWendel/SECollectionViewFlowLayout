@@ -452,6 +452,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SECollectionViewFlowLayout/SECollectionViewFlowLayout-Prefix.pch";
 				INFOPLIST_FILE = "SECollectionViewFlowLayout/SECollectionViewFlowLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -465,6 +466,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SECollectionViewFlowLayout/SECollectionViewFlowLayout-Prefix.pch";
 				INFOPLIST_FILE = "SECollectionViewFlowLayout/SECollectionViewFlowLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -531,6 +533,7 @@
 				AF24722B18B30BAD00614655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF24722C18B30BAD00614655 /* Build configuration list for PBXNativeTarget "SECollectionViewFlowLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +542,7 @@
 				AF24722E18B30BAD00614655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
