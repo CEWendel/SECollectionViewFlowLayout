@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary  = 'A clone of UIImagePickerController with multiple selection support that supports swipe-to-select'
   s.license  = 'MIT'
   s.source   = { :git => 'https://github.com/CEWendel/SECollectionViewFlowLayout.git', :tag => '0.0.1' }
-  s.source_files = 'SWTableViewCell/PodFiles/*.{h,m}'
+  s.source_files = 'SECollectionViewFlowLayout/PodFiles/*.{h,m}'
   s.platform = :ios
   s.ios.deployment_target = '6.0'
   s.requires_arc = true

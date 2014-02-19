@@ -34,7 +34,7 @@ You can also use SECollectionViewFlowLayout in your project and use it with your
 
 ##Usage
 
-When initializing your `UICollectionViewController` using `initWithCollectionViewLayout`, allocate a new `SECollectionViewFlowLayout`
+When initializing your `UICollectionViewController` using `initWithCollectionViewLayout:`, allocate a new `SECollectionViewFlowLayout`
 
 ```objc
 UICollectionViewController *collectionViewController = 
