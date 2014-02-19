@@ -39,9 +39,7 @@ When initializing your `UICollectionViewController` using `initWithCollectionVie
 ```objc
 UICollectionViewController *collectionViewController = 
 [[UICollectionViewController alloc] initWithCollectionViewLayout:
-[SECollectionViewFlowLayout layoutWithAutoSelectRows:YES 
-panToDeselect:YES 
-autoSelectCellsBetweenTouches:YES]];
+[SECollectionViewFlowLayout layoutWithAutoSelectRows:YES panToDeselect:YES autoSelectCellsBetweenTouches:YES]];
 ```
 
 ##Contributing
