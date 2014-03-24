@@ -296,7 +296,7 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QBAssetsCollectionViewController *assetsCollectionViewController = [[QBAssetsCollectionViewController alloc] initWithCollectionViewLayout:[SECollectionViewFlowLayout layoutWithAutoSelectRows:self.allowsSelectRow panToDeselect:YES autoSelectCellsBetweenTouches:YES]];
+    QBAssetsCollectionViewController *assetsCollectionViewController = [[QBAssetsCollectionViewController alloc] initWithCollectionViewLayout:[SECollectionViewFlowLayout layoutWithAutoSelectRows:self.allowsSelectRow panToDeselect:YES autoSelectCellsBetweenTouches:self.autoSelectCellsBetweenTouches]];
     assetsCollectionViewController.imagePickerController = self;
     assetsCollectionViewController.filterType = self.filterType;
     assetsCollectionViewController.allowsMultipleSelection = self.allowsMultipleSelection;
