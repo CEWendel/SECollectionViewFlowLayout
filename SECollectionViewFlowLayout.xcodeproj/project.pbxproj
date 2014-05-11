@@ -30,6 +30,7 @@
 		AF24726218B32D8D00614655 /* QBAssetsCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24725518B32D8D00614655 /* QBAssetsCollectionFooterView.m */; };
 		AF24726318B32D8D00614655 /* QBImagePickerGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24725A18B32D8D00614655 /* QBImagePickerGroupCell.m */; };
 		AF24726418B32D8D00614655 /* QBImagePickerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24725C18B32D8D00614655 /* QBImagePickerThumbnailView.m */; };
+		B24127FC191F4B2F00676122 /* QBImagePickerController.strings in Resources */ = {isa = PBXBuildFile; fileRef = B24127F9191F4B2F00676122 /* QBImagePickerController.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		AF24725A18B32D8D00614655 /* QBImagePickerGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QBImagePickerGroupCell.m; path = PodFiles/QBImagePickerGroupCell.m; sourceTree = "<group>"; };
 		AF24725B18B32D8D00614655 /* QBImagePickerThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QBImagePickerThumbnailView.h; path = PodFiles/QBImagePickerThumbnailView.h; sourceTree = "<group>"; };
 		AF24725C18B32D8D00614655 /* QBImagePickerThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QBImagePickerThumbnailView.m; path = PodFiles/QBImagePickerThumbnailView.m; sourceTree = "<group>"; };
+		B24127FA191F4B2F00676122 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePickerController.strings; sourceTree = "<group>"; };
+		B24127FB191F4B2F00676122 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/QBImagePickerController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +202,7 @@
 				AF24725A18B32D8D00614655 /* QBImagePickerGroupCell.m */,
 				AF24725B18B32D8D00614655 /* QBImagePickerThumbnailView.h */,
 				AF24725C18B32D8D00614655 /* QBImagePickerThumbnailView.m */,
+				B24127F8191F4B2F00676122 /* Resources */,
 			);
 			name = QBImagePickerController;
 			sourceTree = "<group>";
@@ -211,6 +215,14 @@
 				AF24722F18B30C2300614655 /* QBImagePickerController */,
 			);
 			name = PodFiles;
+			sourceTree = "<group>";
+		};
+		B24127F8191F4B2F00676122 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B24127F9191F4B2F00676122 /* QBImagePickerController.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +285,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = AF2471EE18B30BAD00614655;
 			productRefGroup = AF2471F818B30BAD00614655 /* Products */;
@@ -293,6 +306,7 @@
 				AF24721318B30BAD00614655 /* Images.xcassets in Resources */,
 				AF24720518B30BAD00614655 /* InfoPlist.strings in Resources */,
 				AF24720E18B30BAD00614655 /* Main.storyboard in Resources */,
+				B24127FC191F4B2F00676122 /* QBImagePickerController.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +381,15 @@
 				AF24722318B30BAD00614655 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B24127F9191F4B2F00676122 /* QBImagePickerController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B24127FA191F4B2F00676122 /* en */,
+				B24127FB191F4B2F00676122 /* ja */,
+			);
+			name = QBImagePickerController.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -67,19 +67,9 @@
 - (void)setAssetsGroup:(ALAssetsGroup *)assetsGroup
 {
     _assetsGroup = assetsGroup;
-    
-    // Extract three thumbnail images
-    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, MIN(3, assetsGroup.numberOfAssets))];
-    NSMutableArray *thumbnailImages = [NSMutableArray array];
-    [assetsGroup enumerateAssetsAtIndexes:indexes
-                                  options:0
-                               usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                   if (result) {
-                                       UIImage *thumbnailImage = [UIImage imageWithCGImage:[result thumbnail]];
-                                       [thumbnailImages addObject:thumbnailImage];
-                                   }
-                               }];
-    self.thumbnailImages = [thumbnailImages copy];
+
+    UIImage* posterImage = [UIImage imageWithCGImage:[assetsGroup posterImage]];
+    self.thumbnailImages = @[posterImage, posterImage, posterImage];
 }
 
 @end
