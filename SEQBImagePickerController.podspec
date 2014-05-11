@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license  = 'MIT'
   s.source   = { :git => 'https://github.com/CEWendel/SECollectionViewFlowLayout.git', :tag => '0.0.1' }
   s.source_files = 'SECollectionViewFlowLayout/PodFiles/*.{h,m}'
-  s.resources = 'SECollectionViewFlowLayout/PodFiles/Resources'
+  s.resources = 'SECollectionViewFlowLayout/Resources'
   s.platform = :ios
   s.ios.deployment_target = '6.0'
   s.requires_arc = true
