@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SECollectionViewFlowLayout;
+
+@protocol SECollectionViewFlowLayoutDelegate <NSObject>
+
+@optional
+-(void)panGestureDidBeginInLayout:(SECollectionViewFlowLayout *)layout;
+-(void)panGestureDidEndInLayout:(SECollectionViewFlowLayout *)layout;
+
+@end
 
 @interface SECollectionViewFlowLayout : UICollectionViewFlowLayout <UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) id<SECollectionViewFlowLayoutDelegate> delegate;
 @property (nonatomic) BOOL panToDeselect; // If set to YES, enables the deselecting of cells by panning around on a touch down
 @property (nonatomic) BOOL autoSelectRows; // If set to YES, a pan across a row and then down a column will auto-select all cells in each row as you scroll down (used to easily select a lot of cells rather than panning over every cell)
 @property (nonatomic) BOOL autoSelectCellsBetweenTouches; // If set to YES, enables auto-selecting all cells between a first and second selected cell
