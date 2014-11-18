@@ -135,9 +135,25 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
     if (indexPath) {
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         if (cell.isSelected) {
+            
+            if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldDeselectItemAtIndexPath:)]){
+                BOOL shouldDeselect = [self.collectionView.delegate collectionView:self.collectionView shouldDeselectItemAtIndexPath:indexPath];
+                if(shouldDeselect == NO){
+                    return;
+                }
+            }
+            
             [self deselectCellAtIndexPath:indexPath];
         } else {
             // Check if we should handle auto selecting the cells between two touches
+            
+            if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)]){
+                BOOL shouldSelect = [self.collectionView.delegate collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath];
+                if(shouldSelect == NO){
+                    return;
+                }
+            }
+            
             if (self.autoSelectCellsBetweenTouches) {
                 if (self.initialSelectedIndexPath) {
                     [self selectAllItemsFromIndexPath:self.initialSelectedIndexPath toIndexPath:indexPath];
@@ -195,11 +211,27 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
                 if (indexPath) {
                     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
                     if (cell.selected) {
+                        
+                        if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldDeselectItemAtIndexPath:)]){
+                            BOOL shouldDeselect = [self.collectionView.delegate collectionView:self.collectionView shouldDeselectItemAtIndexPath:indexPath];
+                            if(shouldDeselect == NO){
+                                return;
+                            }
+                        }
+                        
                         if (self.panToDeselect) {
                             if (!self.previousIndexPath && ![self.previousIndexPath isEqual:indexPath]) self.deselecting = YES;
                             if (self.deselecting)   [self deselectCellAtIndexPath:indexPath];
                         }
                     } else {
+                        
+                        if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)]){
+                            BOOL shouldSelect = [self.collectionView.delegate collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath];
+                            if(shouldSelect == NO){
+                                return;
+                            }
+                        }
+                        
                         if (!self.deselecting) {
                             [self selectCellAtIndexPath:indexPath];
                             
