@@ -77,6 +77,21 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
     return self;
 }
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        
+        _panToDeselect = NO;
+        _autoSelectRows = NO;
+        _autoSelectCellsBetweenTouches = NO;
+        
+        [self initializer];
+        
+    }
+    return self;
+    
+}
+
 - (void)initializer
 {
     // Pan states
@@ -105,6 +120,7 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     panGestureRecognizer.delegate = self;
     [self.collectionView addGestureRecognizer:panGestureRecognizer];
+    [self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:panGestureRecognizer];
 }
 
 #pragma mark - Gesture handling
@@ -119,9 +135,25 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
     if (indexPath) {
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         if (cell.isSelected) {
+            
+            if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldDeselectItemAtIndexPath:)]){
+                BOOL shouldDeselect = [self.collectionView.delegate collectionView:self.collectionView shouldDeselectItemAtIndexPath:indexPath];
+                if(shouldDeselect == NO){
+                    return;
+                }
+            }
+            
             [self deselectCellAtIndexPath:indexPath];
         } else {
             // Check if we should handle auto selecting the cells between two touches
+            
+            if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)]){
+                BOOL shouldSelect = [self.collectionView.delegate collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath];
+                if(shouldSelect == NO){
+                    return;
+                }
+            }
+            
             if (self.autoSelectCellsBetweenTouches) {
                 if (self.initialSelectedIndexPath) {
                     [self selectAllItemsFromIndexPath:self.initialSelectedIndexPath toIndexPath:indexPath];
@@ -139,12 +171,22 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     // Get velocity and point of pan
+    
+    if(self.collectionView.allowsSelection == NO ){
+        return;
+    }
+    
     CGPoint velocity = [panGestureRecognizer velocityInView:self.collectionView];
     CGPoint point = [panGestureRecognizer locationInView:self.collectionView];
     
     if (!self.collectionView.isDecelerating) {
         // Handle pan
         if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            
+            if ((self.isSelecting || self.isDeselecting) && [self.delegate respondsToSelector:@selector(panGestureDidEndInLayout:)]) {
+                [self.delegate panGestureDidEndInLayout:self];
+            }
+            
             // Reset pan states
             self.selecting = NO;
             self.selectedRow = NO;
@@ -159,23 +201,44 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
                 self.selecting = NO;
             }else {
                 // Register as selecting the cells, not scrolling the collection view
+                if(panGestureRecognizer.state == UIGestureRecognizerStateBegan || self.isSelecting == NO){
+                    if ([self.delegate respondsToSelector:@selector(panGestureDidEndInLayout:)]) {
+                        [self.delegate panGestureDidBeginInLayout:self];
+                    }
+                }
                 self.selecting = YES;
                 NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
                 if (indexPath) {
                     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
                     if (cell.selected) {
+                        
+                        if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldDeselectItemAtIndexPath:)]){
+                            BOOL shouldDeselect = [self.collectionView.delegate collectionView:self.collectionView shouldDeselectItemAtIndexPath:indexPath];
+                            if(shouldDeselect == NO){
+                                return;
+                            }
+                        }
+                        
                         if (self.panToDeselect) {
                             if (!self.previousIndexPath && ![self.previousIndexPath isEqual:indexPath]) self.deselecting = YES;
                             if (self.deselecting)   [self deselectCellAtIndexPath:indexPath];
                         }
                     } else {
+                        
+                        if([self.collectionView.delegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)]){
+                            BOOL shouldSelect = [self.collectionView.delegate collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath];
+                            if(shouldSelect == NO){
+                                return;
+                            }
+                        }
+                        
                         if (!self.deselecting) {
                             [self selectCellAtIndexPath:indexPath];
-                    
+                            
                             if (self.autoSelectRows) [self handleAutoSelectingRowsAtIndexPath:indexPath];
                         }
                     }
-                
+                    
                     // Update previousIndexPath
                     self.previousIndexPath = indexPath;
                 }
@@ -320,6 +383,11 @@ static NSString * const kSECollectionViewKeyPath = @"collectionView";
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     return YES;
+}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    CGPoint velocity = [(UIPanGestureRecognizer *)gestureRecognizer velocityInView:self.collectionView];
+    return fabs(velocity.x) > fabs(velocity.y);
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
